@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Life")]
     public float health = 100;
+    public float originalHealth;
+
 
     [Header("Audio")]
     [SerializeField] AudioSource audioSource;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     public static Queue<PlayerBullet> bullets;
 
+
     [Header("InGame")]
     public int enemyKilled;
 
@@ -44,8 +47,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("player cant shoot without bullets!");
         }
         bullets = new Queue<PlayerBullet>();
-        health = 100;
         enemyKilled = 0;
+        originalHealth = health;
     }
 
     void Update()

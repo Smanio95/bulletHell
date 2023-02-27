@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instantiateThreshold: 5
   maxEnemyInSingleCol: 2
-  minEnemiesToSpawn: 1
-  maxEnemyToSpawn: 2
+  minEnemiesToSpawn: 15
+  maxEnemyToSpawn: 20
   enemy: {fileID: -7083796545691122897, guid: 7d9297b71e4215843b9384c1f5a7e5ec, type: 3}
   bullet: {fileID: 0}

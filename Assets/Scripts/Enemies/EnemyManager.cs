@@ -203,7 +203,8 @@ public class EnemyManager : MonoBehaviour
 
     void RetrievePosAndRotation(List<float> yPositions, List<float> xPositions, List<Quaternion> rotations, float xPos = Mathf.Infinity)
     {
-        int numberOfEnemies = Random.Range(1, maxEnemyInSingleCol);
+        int possibleEnemiesInSingleCol = Mathf.RoundToInt((2 * topEdge) / enemySize);
+        int numberOfEnemies = Mathf.Clamp(Random.Range(1, maxEnemyInSingleCol), 1, possibleEnemiesInSingleCol);
 
         for (int i = 0; i < numberOfEnemies; i++)
         {

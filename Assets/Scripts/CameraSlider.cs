@@ -11,6 +11,7 @@ public class CameraSlider : MonoBehaviour
     [SerializeField] Transform[] levelOneTiles;
     [SerializeField] Transform[] levelTwoTiles;
     [SerializeField] Transform[] levelThreeTiles;
+    [SerializeField] Transform[] starsTiles;
 
     private Transform[][] tiles = new Transform[3][];
 
@@ -72,6 +73,11 @@ public class CameraSlider : MonoBehaviour
     {
         length = tiles[GameManager.currentLevel].Length;
         middle = (length - 1) / 2;
+
+        for (int i = 0; i < length; i++)
+        {
+            starsTiles[i].position = new Vector3(tiles[GameManager.currentLevel][i].position.x, starsTiles[i].position.y, starsTiles[i].position.z);
+        }
     }
 
     void OffsetReach()
@@ -82,24 +88,33 @@ public class CameraSlider : MonoBehaviour
         }
     }
 
+    // possible because both background tiles and stars tiles have same size 
     void RepositionateTiles()
     {
         if (tiles.Length == 0 || length == 0) return;
+        
+        ManageReposition(tiles[GameManager.currentLevel], length);
 
-        Transform firstT = tiles[GameManager.currentLevel][0];
-        firstT.position = new Vector3(tiles[GameManager.currentLevel][length - 1].position.x + tileSize / 2, firstT.position.y, firstT.position.z);
+        ManageReposition(starsTiles, starsTiles.Length);
+
+    }
+
+    void ManageReposition(Transform[] tiles, int length)
+    {
+        Transform firstT = tiles[0];
+        firstT.position = new Vector3(tiles[length - 1].position.x + tileSize / 2, firstT.position.y, firstT.position.z);
 
         for (int i = 0; i < length; i++)
         {
             if (i < length - 1)
             {
-                tiles[GameManager.currentLevel][i] = tiles[GameManager.currentLevel][i + 1];
+                tiles[i] = tiles[i + 1];
             }
             else
             {
-                tiles[GameManager.currentLevel][i] = firstT;
+                tiles[i] = firstT;
             }
         }
-
     }
+
 }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public PlayerController player;
+    [SerializeField] float bonusLevelEndHealth = 25f;
 
     [Header("Levels")]
     public static int currentLevel = -1;
@@ -99,6 +100,8 @@ public class GameManager : MonoBehaviour
 
                 player.gameObject.layer = (int)Layers.Player;
 
+                player.health = Mathf.Clamp(player.health + bonusLevelEndHealth, player.health, player.originalHealth);
+                Debug.Log(player.health);
                 player.endOfLevel = false;
 
             }
